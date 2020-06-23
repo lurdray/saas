@@ -1,0 +1,136 @@
+{% extends 'coronavirus_test/base.html' %}
+
+{% block blogactive %}active{% endblock blogactive %}
+
+{% block title %}Blogsmond Coronavirus Test{% endblock title %}
+
+{% block content %}
+
+	<div class="container">
+		
+		 <!-- Side Widget -->
+            <div class="card my-4">
+                <h3 class="card-header">Coronavirus Test</h3>
+                <div class="card-body">
+                	<div class="jumbotron" style="background-color: teal; color: white;">
+                        <h3>Wecome to Blogsmond Web Analytics. -Corona Virus Test</h3>
+                        <p>Infomations here were gathered from the WORLD HEALTH ORGANISATION and other important health concerned bodies</p>
+                        <p>Meaning of some of the words are: 
+                        <ul>
+                        	<li>Diarrhea - watery excrete that comes out from the bodies during discharge of feces</li>
+                        	<li>Sore Throat - Swelling of any part of the Respiratory Tract</li>
+                        	<li>Fatigue - tiredness or feeling too exhausted.</li>
+                        </ul>
+                        <b>INSTRUCTIONS: Honestly rate yourself by scaling to a value that matches how much of the symtoms you have</b>
+                     </div>
+                	<form method="post">
+						{% csrf_token %}
+						<div class="jumbotron">
+                        <div class="input-group">
+                                <input type="text" name="name" class="form-control" placeholder="Your name" required="required">
+                        </div><br />
+                        <div class="input-group">
+                                <input type="text" name="phone" class="form-control" placeholder="Your phone" required="required">
+                        </div>
+                        <br />
+                        <b>Please Note: Your personal informations would be kept private!</b>
+                        </div>
+                        <div class="jumbotron">
+                        <div class="input-group jumbotrons" style="height: 85px;">
+                        		<b>Cough<b/>
+                                <input type="range" name="cough" min="0" max="9" onchange="updateTextInputCough(this.value);">
+                                <span><input style="width: 35px;" type="text" id="textInput_cough" value="4"></span>
+                        </div>
+                        <div class="input-group jumbotrons" style="height: 85px;">
+                        		<b>Cold<b/>
+                                <input type="range" name="cold" min="0" max="9" onchange="updateTextInputCold(this.value);">
+                                <span><input style="width: 35px;" type="text" id="textInput_cold" value="4"></span>
+                        </div>
+                        <div class="input-group jumbotrons" style="height: 85px;">
+                        		<b>Diarrhea<b/>
+                                <input type="range" name="diarrhea" min="0" max="9" onchange="updateTextInputDiarrhea(this.value);">
+                                <span><input style="width: 35px;" type="text" id="textInput_diarrhea" value="4"></span>
+                        </div>
+                        <div class="input-group jumbotrons" style="height: 85px;">
+                        		<b>Sore Throat<b/>
+                                <input type="range" name="sore_throat" min="0" max="9" onchange="updateTextInputSore_throat(this.value);">
+                                <span><input style="width: 35px;" type="text" id="textInput_sore_throat" value="4"></span>
+                        </div>
+                        <div class="input-group jumbotrons" style="height: 85px;">
+                        		<b>Body Pain<b/>
+                                <input type="range" name="body_aches" min="0" max="9" onchange="updateTextInputBody_aches(this.value);">
+                                <span><input style="width: 35px;" type="text" id="textInput_body_aches" value="4"></span>
+                        </div>
+                        <div class="input-group jumbotrons" style="height: 85px;">
+                        		<b>Headache<b/>
+                                <input type="range" name="headaches" min="0" max="9" onchange="updateTextInputHeadaches(this.value);">
+                                <span><input style="width: 35px;" type="text" id="textInput_headaches" value="4"></span>
+                        </div>
+                        <div class="input-group jumbotrons" style="height: 85px;">
+                        		<b>Fever<b/>
+                                <input type="range" name="fever" min="0" max="9" onchange="updateTextInputFever(this.value);">
+                                <span><input style="width: 35px;" type="text" id="textInput_fever" value="4"></span>
+                        </div>
+                        <div class="input-group jumbotrons" style="height: 85px;">
+                        		<b>Difficulty in breathing<b/>
+                                <input type="range" name="difficulty_breathing" min="0" max="9" onchange="updateTextInputDifficulty_breathing(this.value);">
+                                <span><input style="width: 35px;" type="text" id="textInput_difficulty_breathing" value="4"></span>
+                        </div>
+                        <div class="input-group jumbotrons" style="height: 85px;">
+                        		<b>Fatigue<b/>
+                                <input type="range" name="fatigue" min="0" max="9" onchange="updateTextInputFatigue(this.value);">
+                                <span><input style="width: 35px;" type="text" id="textInput_fatigue" value="4"></span>
+                        </div>
+                        </div>
+                        <div class="jumbotron">
+                        <div class="form-group">
+                        <label>Travelled 14days ago ?</label>
+                        <div>
+                          <select class="form-control" name="travelled_14days_ago">
+                              <option value="0">No</option>
+                              <option value="4">Maybe(Not sure)</option>
+                              <option value="9">Yes</option>
+                          </select>
+                        </div>
+                      </div>
+                        <div class="form-group">
+                        <label>Any travel history to an infected area ?</label>
+                        <div>
+                          <select class="form-control" name="travel_history_to_infected_area">
+                              <option value="0">No</option>
+                              <option value="4">Maybe(Not sure)</option>
+                              <option value="9">Yes</option>
+                          </select>
+                        </div>
+                      </div>
+                        <div class="form-group">
+                        <label>Contact with infected Person? </label>
+                        <div>
+                          <select class="form-control" name="contact_with_infected">
+                              <option value="0">No</option>
+                              <option value="4">Maybe(Not sure)</option>
+                              <option value="9">Yes</option>
+                          </select>
+                        </div>
+                      </div>
+                      </div>
+                      
+                      <div class="form-group">
+                      	<label>
+                      <input name="tac" type="checkbox" required="required">Please note that this is only a symtom-analysis checkup and Blogsmond would not be responsible for any disappointment whatsoever if you proceed. Do you agree ?
+                    </label>
+                       <button style="width:100%;" type="submit" class="btn btn-primary">Submit Data!</button>
+                     <div>
+                      
+                        
+                    </form>
+                </div>
+                
+            </div>
+            
+
+
+	</div>
+	
+
+{% endblock content %}

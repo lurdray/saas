@@ -1,0 +1,159 @@
+{% extends 'blog/base.html' %}
+{% load staticfiles %}
+
+{% block blogactive %}active{% endblock blogactive %}
+
+{% block title %}Blogsmond{% endblock title %}
+
+{% block content %}
+
+	<section class="text-center">
+		<div class="jumbotron container" id="imgcover">
+				<br />
+
+		    <h1 class="jumbotron-heading">Welcome to BLOGSMOND</h1>
+		    	<br />
+		    	<br />
+		    	 <a href="{% url 'blog:all_tv' %}" class="btn btn-warning">Blogsmond Tv <span class="badge"></span></a>
+		    	  <a href="{% url 'blog:all_series' %}" class="btn btn-primary">Series<span class="badge"></span></a>
+		    <a href="{% url 'blog:all_post' %}" class="btn btn-success">Trends <span class="badge"></span></a>
+		     <a href="{% url 'blog:all_post' %}" class="btn btn-primary">Gossip <span class="badge"></span></a>
+		</div>
+	</section>
+	
+<!-- all posts -->
+<div class="container jumbotron" style="background-color: whites;">
+
+	<div class="row">
+	
+		 <!-- Search Widget -->
+            <div class="card col-md-12">
+                <h5 class="card-header">Search</h5>
+                <div class="card-body">
+                    <form action="{% url 'blog:index' %}" , method="GET">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <input type="text" name="query" class="form-control" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-secondary" type="submit">Go!</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+	</div>
+
+    <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+
+            <h3 class="my-4">Breaking News</h3>
+            <hr>
+
+            <!-- Blog Post  this ois just some really cool func files from web net core!-->
+            <div class="card mb-5">
+                <a href="{% url 'blog:breaking_detail' breaking.id %}"><img class="card-img-top" src="{{ breaking.image.url }}" alt="Card image cap" width="750px" height="450px"></a>
+                <div class="card-body">
+                    <a href="{% url 'blog:breaking_detail' breaking.id %}"><h3 class="card-title" style="color:teal;">{{ breaking.title }}</h3></a>
+                    <p class="card-text">{{ post.body|truncatewords:15 }}</p>
+                    <a href="{% url 'blog:breaking_detail' breaking.id %}" class="btn btn-primary">Read More →</a>
+                </div>
+                <div class="card-footer text-muted">
+                    Posted on {{ breaking.pub_date }}
+                </div>
+            </div>
+
+            
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
+
+			
+            <!-- Side Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">Blogsmond TV</h5>
+                <div class="card-body">
+                	<ul>
+                		{% for each_tv in tv %}
+		            		<li>
+		            			<a href="{% url 'blog:tv_detail' each_tv.id %}" />
+		            				{{ each_tv.title }}
+		            			</a>
+		            		</li>
+                		{% endfor %}
+                	</ul>
+                </div>
+                <a href="{% url 'blog:all_tv' %}" class="btn btn-warning">view all →</a>
+            </div>
+            
+             <!-- Side Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">Blogsmond Series</h5>
+                <div class="card-body">
+                	<ul>
+                		{% for each_series in series %}
+		            		<li>
+		            			<a href="{% url 'blog:series_detail' each_series.id %}" />
+		            				{{ each_series.title }}
+		            			</a>
+		            		</li>
+                		{% endfor %}
+                	</ul>
+                </div>
+                <a href="{% url 'blog:all_series' %}" class="btn btn-primary">view all →</a>
+            </div>
+            
+             <!-- Side Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">Blogsmond Stories</h5>
+                <div class="card-body">
+                	<ul>
+                		{% for each_post in posts %}
+		            		<li>
+		            			<a href="{% url 'blog:post_detail' each_post.id %}" />
+		            				{{ each_post.title }}
+		            			</a>
+		            		</li>
+                		{% endfor %}
+                	</ul>
+                </div>
+				<a href="{% url 'blog:all_post' %}" class="btn btn-success">view all →</a>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.row -->
+    
+    <div class="row">
+    
+    	<!-- Side Widget -->
+    	
+    		{% for post in all_posts %}
+    		<div class="col-sm-3">
+		        <div class="card my-3">
+		            <div class="card-body">
+		            	<a href="{% url 'blog:post_detail' post.id %}">
+		            		<img class="card-img-top" src="{{ post.image.url }}" alt="Card image cap" width="50px" height="100px">
+		            	
+		            </div>
+		            <div class="card-footer text-muted">
+		            	<a href="{% url 'blog:post_detail' post.id %}">
+		            		{{ post.title }}
+		            	</a>
+		            </div>
+		        </div>
+		     </div>
+            {% endfor %}	
+        
+        
+      </div>
+    	
+
+    
+</div>
+{% endblock content %}
+
+

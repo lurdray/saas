@@ -1,0 +1,66 @@
+{% extends 'coronavirus_test/base.html' %}
+{% load staticfiles %}
+
+{% block blogactive %}active{% endblock blogactive %}
+
+{% block title %}Blogsmond Test Result{% endblock title %}
+
+{% block content %}
+
+	<div class="container">
+		
+		 <!-- Side Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">Corona Virus Test Result</h5>
+                <div class="card-body">
+                	
+                	<div class="jumbotron" style="background-color: teal;">
+                		<div class="row">
+		            		<div class="col-md-6">
+				        		<h3 style="color: white;">{{ name }}'s corona virus test results.</h3>
+				        		<p class="lead">This is brought to you by Blogsmond Analytic Team</p>
+		            		</div>
+		            		<div class="col-md-6">
+		            			<img class="img img-rounded" width="100%" height="150px" src="{% static 'coronavirus_test/images/covid5.png' %}" />
+		            		</div>
+		            	</div>
+                	</div>
+                	
+                	<div class="jumbotron">
+                		<div class="row">
+                			<div class="col-md-6">
+                				<h3>Your Score is: <h1 style="color: teal;">{{ result }} %</h1></h3>
+                				<p>{{ info }}</p>
+                			</div>
+                			<div class="col-md-6">
+                				<img class="img img-rounded" width="100%" height="250px" src="{% static 'coronavirus_test/images/covid1.png' %}" />
+                			</div>
+                		
+                		</div><br />
+                		<div class="row">
+                			<div class="col-md-12">
+                				<h5>Here is what to do....</h5>
+                				<ul>
+                					{% for precaution in precautions %}
+                						<li style="color: teal;">{{ precaution }}</li>
+                					{% endfor %}
+                				<ul>
+                				<b>Please note that this is only a symtom-analysis checkup and Blogsmond would not be responsible for any disappointment whatsoever.</b>
+                			</div>
+                		</div>
+                	
+                	</div>
+                	
+                </div>
+            </div>
+
+
+      
+      
+
+	</div>
+	
+	
+	
+
+{% endblock content %}
